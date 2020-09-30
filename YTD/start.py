@@ -9,4 +9,4 @@ while not exit:
         exit = True
         print("Bye!")
     else:
-        print("Whong choice.")
+        print("Wrong choice.")
