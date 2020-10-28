@@ -22,9 +22,10 @@ class GetCOVID19:
 
     def __get_covid19_info(self):
         responce = requests.get(self.__COVID19API)
-        covid_data = responce.json()
+        self.__covid_data = responce.json()
 
-        for item in covid_data['Countries']:
+        self.__cursor.execute("TRUNCATE Countries")
+        for item in self.__covid_data['Countries']:
             sql = "INSERT INTO Countries (Country, CountryCode, Slug, NewConfirmed, TotalConfirmed, NewDeaths, TotalDeaths, NewRecovered, TotalRecovered, Date) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
             val = (item['Country'], item['CountryCode'], item['Slug'], item['NewConfirmed'], item['TotalConfirmed'],
